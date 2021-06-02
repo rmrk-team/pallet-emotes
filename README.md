@@ -34,6 +34,16 @@ Therefore, querying by namespace and entity ID is of paramount importance, but o
 
 This pallet needs to be benchmarked for complexity at high load both incoming (many incoming transactions) and persisted (queries of big sets of data).
 
+## ED and refcount
+
+Generally when an account has some interactivity on-chain, it needs to *exist*, and the existence is reserved via an [existential deposit](https://wiki.polkadot.network/docs/en/build-protocol-info#existential-deposit) or via increasing / decreasing refcount. With emotes, we do not think this is necessary if the data is optimized enough. However, the problem of old data and account pruning remains a cryptoeconomic problem that's worth exploring:
+
+- do we wipe all emotes by an account when this account is reaped?
+- do we require an account to make a deposit of some kind to gain emote functionality, treating it similarly to the Identity pallet?
+- do we *squash* emotes older than X period of time to conserve space, and only monitor granular time-series data within the X period? It is arguably unnecessary to have total details about emotes on a 2 year old dormant NFT, and someone wanting these details can sync with an archive node instead and replay the extrinsics.
+
+The above problems are up for discussion and analysis.
+
 ## Custom Functionality
 
 The pallet should also allow the root origin (Council or Sudo) to:
