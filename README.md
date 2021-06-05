@@ -1,10 +1,10 @@
 # Emotes Pallet
 
-A pallet allowing users to emote on entities in the Substrate ecosystem
+A pallet allowing users to emote on entities in the Substrate ecosystem.
 
 ## Functionality
 
-Users can send emotes to any on-chain entity (AccountID, NFT ID, any other asset). Originally implemented as remarks via https://github.com/rmrk-team/rmrk-spec/blob/master/standards/rmrk1.0.0/interactions/emote.md
+Users can send emotes to any on-chain entity (AccountID, NFT ID, any other asset). Originally implemented as remarks in [RMRK Spec](https://github.com/rmrk-team/rmrk-spec).
 
 An emote is a switch. Sending a 🚀 twice from the same accounts results in that rocket no longer being applied to that entity.
 
@@ -12,7 +12,7 @@ An emote is a switch. Sending a 🚀 twice from the same accounts results in tha
 
 An entity being emoted on should be namespaced, so it is clear which group of entities it belongs to (i.e. they may be an NFT with an ID that matches an account ID - which entity is being emoted on?)
 
-Current namespaces:
+Hardcoded namespaces:
 
 |Namespace|References|
 |----|----|
@@ -21,6 +21,13 @@ Current namespaces:
 |rmrk2|ID of RMRK 2.0 NFT|
 |ink|Unique identifier of smart contract|
 |eth|Hex of smart contract or Ethereum EOA|
+
+Chains integrating the pallet can define their own namespaces in the Config of this pallet. For example:
+
+|Namespace|References|
+|----|----|
+|sub:post|Subsocial post|
+|sub:space|Subsocial space|
 
 ## Supported Emote set
 
@@ -48,6 +55,7 @@ The above problems are up for discussion and analysis.
 
 The pallet should also allow the root origin (Council or Sudo) to:
 
+- append to the set of namespaces for custom entities on a specific chain
 - change the emote cost
 - blacklist a user
 - wipe all emotes by a certain user
