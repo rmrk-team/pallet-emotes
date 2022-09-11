@@ -41,6 +41,8 @@ Therefore, querying by namespace and entity ID is of paramount importance, but o
 
 This pallet needs to be benchmarked for complexity at high load both incoming (many incoming transactions) and persisted (queries of big sets of data).
 
+Possible implementation: [bit flags](https://hackmd.io/JjqT6THTSoqMj-_ucPEJAw).
+
 ## ED and refcount
 
 Generally when an account has some interactivity on-chain, it needs to *exist*, and the existence is reserved via an [existential deposit](https://wiki.polkadot.network/docs/en/build-protocol-info#existential-deposit) or via increasing / decreasing refcount. With emotes, we do not think this is necessary if the data is optimized enough. However, the problem of old data and account pruning remains a cryptoeconomic problem that's worth exploring:
